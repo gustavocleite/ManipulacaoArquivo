@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import util.CpfUtil;
+
 /**
  *
  * @author gustavo
@@ -14,22 +16,36 @@ public class Cliente {
     private String nome;
     private String telefone;
     private Endereco endereco;
+    private String cpf;
 
-
-    public Cliente(int id, String nome, String telefone, Endereco endereco) {
+    public Cliente(int id, String nome, String telefone, String cpf, Endereco endereco) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.endereco = endereco;
+        setCpf(cpf);
     }
 
-    public Cliente(String nome, String telefone, Endereco endereco) {
+    public Cliente(String nome, String telefone, String cpf, Endereco endereco) {
         this.nome = nome;
         this.telefone = telefone;
         this.endereco = endereco;
+        setCpf(cpf);
     }
 
-    
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+
+
+        if (!CpfUtil.validarCpf(cpf)) {
+            throw new IllegalArgumentException("CPF inválido!");
+        }
+        this.cpf = cpf;
+    }
+
     public int getId() {
         return id;
     }
@@ -37,7 +53,6 @@ public class Cliente {
     public void setId(int id) {
         this.id = id;
     }
-    
 
     public String getNome() {
         return nome;

@@ -23,7 +23,7 @@ public class ClienteDAO implements ICliente {
     private String arquivo = "";
 
     public ClienteDAO() {
-        arquivo = ".\\src\\dados\\clientes.csv";
+        arquivo = ".\\src\\dados\\clientesNewNew.csv";
     }
 
     @Override
@@ -35,11 +35,12 @@ public class ClienteDAO implements ICliente {
 
         FileWriter fw = new FileWriter(arquivo, true);
         PrintWriter pw = new PrintWriter(fw);
-       
+
         pw.println(
                 cliente.getId() + ";"
                 + cliente.getNome() + ";"
                 + cliente.getTelefone() + ";"
+                + cliente.getCpf() + ";"
                 + cliente.getEndereco().getLogradouro() + ";"
                 + cliente.getEndereco().getNumero() + ";"
                 + cliente.getEndereco().getBairro() + ";"
@@ -66,17 +67,18 @@ public class ClienteDAO implements ICliente {
                 String[] dados = linha.split(";");
 
                 Endereco endereco = new Endereco(
-                        dados[3],
-                        Integer.parseInt(dados[4]),
-                        dados[5],
+                        dados[4],
+                        Integer.parseInt(dados[5]),
                         dados[6],
-                        dados[7]
+                        dados[7],
+                        dados[8]
                 );
 
                 Cliente cliente = new Cliente(
                         Integer.parseInt(dados[0]),
                         dados[1],
                         dados[2],
+                        dados[3],
                         endereco
                 );
 
@@ -131,6 +133,7 @@ public class ClienteDAO implements ICliente {
                         cliente.getId() + ";"
                         + cliente.getNome() + ";"
                         + cliente.getTelefone() + ";"
+                        + cliente.getCpf() + ";"
                         + cliente.getEndereco().getLogradouro() + ";"
                         + cliente.getEndereco().getNumero() + ";"
                         + cliente.getEndereco().getBairro() + ";"
